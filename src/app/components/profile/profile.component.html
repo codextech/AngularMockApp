@@ -1,0 +1,108 @@
+<div id="container" class="cls-container">
+
+        
+		
+    <!-- BACKGROUND IMAGE -->
+    <!--===================================================-->
+    <div id="bg-overlay"></div>
+    
+    
+    <!-- REGISTRATION FORM -->
+    <!--===================================================-->
+    <div class="cls-content">
+        <div class="cls-content-lg panel">
+            <div class="panel-body">
+                <div class="mar-ver pad-btm">
+                    <h1 class="h3">Complete Your Profile</h1>
+                </div>
+                <form [formGroup]="form" (ngSubmit)="AddProfile()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input  formControlName="name"  name="fullname" type="text" class="form-control" placeholder="Full name">
+                                <div class="alert alert-danger" *ngIf="form.get('name').touched && form.get('name').invalid">
+                                    <div *ngIf="form.get('name').errors.required">Name is required</div> 
+                                    
+                                </div>
+                           </div>
+
+                            <div class="form-group">
+                                <input formControlName="email"   name="email" type="text" class="form-control" placeholder="E-mail">
+                                <div class="alert alert-danger" *ngIf="form.get('email').touched && form.get('email').invalid">
+                                    <div *ngIf="form.controls['email'].errors.required">Email is required</div> 
+                                    <div  *ngIf="form.controls['email'].errors.email"> Email is not valid</div>
+                                  
+                                </div>
+                            </div>
+
+                            <div>
+                                <input type="file" formControlName="profilePicture"  />
+                            </div>
+                        </div>
+
+                          <!-- Form Array -->
+                      <div formArrayName="interests">
+                          
+                        <div class="col-sm-12">
+
+                          <h4>Your Interests</h4>
+
+                          
+                          <div *ngFor="let interst of form.get('interests').controls; let i = index">
+                             
+                              <div class="intrests-Fields" [formGroupName]="i">
+  
+                                  <div class="col-sm-4">
+                                  <input formControlName="interest"   name="intresttype" type="text" class="form-control" placeholder="interest type">
+                                  <div class="alert alert-danger" *ngIf="interst.get('interest').touched && interst.get('interest').invalid">
+                                  Required
+                                  </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                  <input formControlName="Description"   name="Description" type="text" class="form-control" placeholder="Description">
+                                  <div class="alert alert-danger" *ngIf="interst.get('Description').touched && interst.get('Description').invalid">
+                                      Required
+                                      </div> 
+                                 </div>
+                                  <button id="add-btn" [disabled]="!interst.get('interest').valid || !interst.get('Description').valid" (click)="AddIntrests()" class="btn btn-primary">Add</button>
+                                  <button [disabled]="form.get('interests').length == 1" (click)="RemoveIntrests(i)" class="btn btn-danger">Remove</button>
+
+                                  
+                              </div>
+
+  
+                            </div>
+  
+                        </div>
+
+                      </div>
+                      
+                    </div>
+                   
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Done</button>
+                </form>
+            </div>
+           
+        </div>
+    </div>
+    <!--===================================================-->
+    
+    
+    
+    
+    
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+  
+
+
+
+
+
+
+
+
+
+    
+  
